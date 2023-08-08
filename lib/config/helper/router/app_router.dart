@@ -7,10 +7,10 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
     name: HomeScreen.name,
     builder: (context, state) => const HomeScreen(),
   ),
-  GoRoute(
-      path: '/theme',
-      name: ThemeScreen.name,
-      builder: ((context, state) => const ThemeScreen())),
+  // GoRoute(
+  //     path: '/theme',
+  //     name: ThemeScreen.name,
+  //     builder: ((context, state) => const ThemeScreen())),
   GoRoute(
     path: '/monthemployment',
     name: MonthScreen.name,

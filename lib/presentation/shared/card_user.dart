@@ -20,7 +20,7 @@ class CardUser extends StatelessWidget {
     return SizedBox(
       height: size.height*.105,
       child: Card(
-        color: colors.secondaryContainer,
+        color: colors.onInverseSurface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: BorderSide(

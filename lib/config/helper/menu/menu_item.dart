@@ -11,7 +11,8 @@ class MenuItem {
     required this.link, 
     required this.iconData
   });
-
+  
+  set iconData(IconData iconData) => iconData = this.iconData;
 }
 
 const appMenuItem = <MenuItem>[

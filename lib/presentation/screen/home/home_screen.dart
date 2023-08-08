@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:router_basic_app/config/helper/menu/menu_item.dart';
+import 'package:router_basic_app/presentation/providers/theme_provider.dart';
 import '../../shared/button_router.dart';
 import '../../shared/card_user.dart';
 import '../../shared/custom_text.dart';
@@ -35,14 +37,15 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _HomeView extends StatelessWidget {
+class _HomeView extends ConsumerWidget {
   const _HomeView({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final theme = ref.watch(themeProvider).isDarkMode;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(children: [
@@ -51,9 +54,9 @@ class _HomeView extends StatelessWidget {
                 'https://i.pinimg.com/474x/c2/4b/93/c24b93d9ca0b94291368cacded0d73f1.jpg',
             name: 'John Doe',
             typeUser: 'Candidant'),
-       SizedBox(
-        height: size.height*.02,
-       ),
+        SizedBox(
+          height: size.height * .02,
+        ),
         SizedBox(
           width: size.width,
           height: size.height * .72,
@@ -63,9 +66,15 @@ class _HomeView extends StatelessWidget {
               final menuItem = appMenuItem[index];
               return ButtonRouter(
                 menuItem: menuItem,
-                onPressed: (){
-                  context.push(menuItem.link);
-                },);
+                onPressed: () {
+                  if (menuItem.title != 'Theme') {
+                    context.push(menuItem.link);
+                    return;
+                  }
+                 ref.watch(themeProvider.notifier).toggleChangeTheme();
+
+                },
+              );
             },
           ),
         )
@@ -73,4 +82,3 @@ class _HomeView extends StatelessWidget {
     );
   }
 }
-
